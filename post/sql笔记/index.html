@@ -405,27 +405,7 @@ WHERE date &gt; &lsquo;1994-11-28&rsquo;;</p>
 
   
 
-  <div class="post bg-white">
-      <div id="comments-gitment"></div>
-      <link rel="stylesheet" href="/lib/gitment/gitment-0.0.3.min.css">
-        <script src="/lib/gitment/gitment-0.0.3.min.js"></script>
-      <script type="text/javascript">
-      const gitment = new Gitment({
-        id: 'SQL笔记.md',
-        title: 'SQL笔记',
-        link: decodeURI(location.href),
-        desc: '基础知识 SQL IN SELECT column_name FROM table_name WHERE column_name IN (value1, value2); 作用：筛选column等于value1或value2。\nSQL BETWEEN SELECT column_name(s) FROM table_name WHERE column_name IN (value1,value2); 作用：筛选大于等于value小于value2。 value可为字符串。\nALTER 添加列\nALTER TABLE table_name ADD column_name datatype 删除列\nALTER TABLE table_name DROP COLUMN column_name 改变列数据类型\nALTER TABLE table_name ALTER COLUMN column_name datatype 常用记不住的SQL语句收集 创建行时create_at字段自动填写为当前时间。 ALTER TABLE foo MODIFY create_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP; 更新行时update_at字段自动填写为当前时间。 ALTER TABLE foo MODIFY update_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;',
-        owner: 'deadwind4',
-        repo: 'deadwind4.github.io',
-        oauth: {
-          client_id: '4bc2182256821ef0ed9d',
-          client_secret: 'b61bef01909b093e8a61ac7f5c3499b620cfe475'
-        }
-      })
-      gitment.render('comments-gitment')
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
-    </div>
+  
 
   
 
