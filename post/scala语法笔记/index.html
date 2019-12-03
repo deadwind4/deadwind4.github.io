@@ -584,7 +584,27 @@ foo {
 
   
 
-  
+  <div class="post bg-white">
+      <div id="comments-gitment"></div>
+      <link rel="stylesheet" href="/lib/gitment/gitment-0.0.3.min.css">
+        <script src="/lib/gitment/gitment-0.0.3.min.js"></script>
+      <script type="text/javascript">
+      const gitment = new Gitment({
+        id: 'Scala语法笔记.md',
+        title: 'Scala语法笔记',
+        link: decodeURI(location.href),
+        desc: '函数 如果函数没参数可以不写括号\ndef three = 1 \x2b 2 匿名函数\n(x: Int) =\x26gt; x \x2b 1 val addOne = (x: Int) =\x26gt; x \x2b 1 部分应用\ndef adder(m: Int, n: Int) = m \x2b n val add2 = adder(2, _: Int) add2(3) res: Int = 5 科里化\ndef multiply(m: Int)(n: Int): Int = m * n multiply(2)(3) val timesTwo = multiply(2) _ times(3) 类 除了方法之外的代码全是构造函数\nprivate 内部类可以访问private\n外部类不能访问private\n但是Java中都可以\nclass Outer{ class Inner{ private def f(){println(\x26quot;f\x26quot;)} class InnerMost{ f() \/\/ 正确 } } (new Inner).',
+        owner: 'deadwind4',
+        repo: 'deadwind4.github.io',
+        oauth: {
+          client_id: '4bc2182256821ef0ed9d',
+          client_secret: 'b61bef01909b093e8a61ac7f5c3499b620cfe475'
+        }
+      })
+      gitment.render('comments-gitment')
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+    </div>
 
   
 

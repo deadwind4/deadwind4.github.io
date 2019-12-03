@@ -440,7 +440,27 @@ log_bin_index: 文件索引，存了binlog的文件名。例如：/var/log/mysql
 
   
 
-  
+  <div class="post bg-white">
+      <div id="comments-gitment"></div>
+      <link rel="stylesheet" href="/lib/gitment/gitment-0.0.3.min.css">
+        <script src="/lib/gitment/gitment-0.0.3.min.js"></script>
+      <script type="text/javascript">
+      const gitment = new Gitment({
+        id: 'MySQL笔记.md',
+        title: 'MySQL笔记',
+        link: decodeURI(location.href),
+        desc: 'Mysql学习笔记 安装 资料 删除掉所有有关mariadb的包\nwget https:\/\/cdn.mysql.com\/archives\/mysql-5.7\/mysql-5.7.22-linux-glibc2.12-x86_64.tar.gz wget https:\/\/cdn.mysql.com\/\/Downloads\/MySQL-5.7\/mysql-5.7.24-1.el7.x86_64.rpm-bundle.tar rpm -qa | grep -i mariadb rpm -e --nodeps mariadb-libs-5.5.52-1.el7.x86_64 rpm -ivh mysql-community-common-5.7.23-1.el7.x86_64.rpm rpm -ivh mysql-community-libs-5.7.23-1.el7.x86_64.rpm rpm -ivh mysql-community-client-5.7.23-1.el7.x86_64.rpm rpm -ivh mysql-community-server-5.7.23-1.el7.x86_64.rpm 用户  创建 CREATE USER \x27username\x27@\x27host\x27 IDENTIFIED BY \x27password\x27; 字段含义  username：创建用户的用户名 host：指定用户在哪个主机可以登录，如果想让该用户可以从任意远程主机登录，则使用通配符% password：该用户的登录密码。如果为空，则该用户不需要密码即可登录。  举例： CREATE USER \x27test\x27@\x27%\x27 IDENTIFIED BY \x27test\x27; CREATE USER \x27test\x27; 权限 GRANT privileges ON databasename.tablename TO \x27username\x27@\x27host\x27 字段含义  privileges：用户的权限。如SELECT、INSERT、UPDATE等，如授予所有权限则为ALL。 databasename：数据库名 tablename：表名，如授予所有库和表的操作权限则为*，如*.*  例子： GRANT SELECT, INSERT ON testdb.',
+        owner: 'deadwind4',
+        repo: 'deadwind4.github.io',
+        oauth: {
+          client_id: '4bc2182256821ef0ed9d',
+          client_secret: 'b61bef01909b093e8a61ac7f5c3499b620cfe475'
+        }
+      })
+      gitment.render('comments-gitment')
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+    </div>
 
   
 
