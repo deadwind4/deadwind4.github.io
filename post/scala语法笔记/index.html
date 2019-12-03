@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-cn" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Scala语法笔记 - 天问</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="Ana" />
+  <meta name="description" content="函数 如果函数没参数可以不写括号
+def three = 1 &#43; 2 匿名函数
+(x: Int) =&amp;gt; x &#43; 1 val addOne = (x: Int) =&amp;gt; x &#43; 1 部分应用
+def adder(m: Int, n: Int) = m &#43; n val add2 = adder(2, _: Int) add2(3) res: Int = 5 科里化
+def multiply(m: Int)(n: Int): Int = m * n multiply(2)(3) val timesTwo = multiply(2) _ times(3) 类 除了方法之外的代码全是构造函数
+private 内部类可以访问private
+外部类不能访问private
+但是Java中都可以
+class Outer{ class Inner{ private def f(){println(&amp;quot;f&amp;quot;)} class InnerMost{ f() // 正确 } } (new Inner)." />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.60.1" />
+
+
+<link rel="canonical" href="https://blog.luning.wang/post/scala%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.0995afa14b62cd93e93cfc066b646c4c17a3eddca0e9d52a1d9dcf5d90aaacd3.css" integrity="sha256-CZWvoUtizZPpPPwGa2RsTBej7dyg6dUqHZ3PXZCqrNM=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="Scala语法笔记" />
+<meta property="og:description" content="函数 如果函数没参数可以不写括号
+def three = 1 &#43; 2 匿名函数
+(x: Int) =&gt; x &#43; 1 val addOne = (x: Int) =&gt; x &#43; 1 部分应用
+def adder(m: Int, n: Int) = m &#43; n val add2 = adder(2, _: Int) add2(3) res: Int = 5 科里化
+def multiply(m: Int)(n: Int): Int = m * n multiply(2)(3) val timesTwo = multiply(2) _ times(3) 类 除了方法之外的代码全是构造函数
+private 内部类可以访问private
+外部类不能访问private
+但是Java中都可以
+class Outer{ class Inner{ private def f(){println(&quot;f&quot;)} class InnerMost{ f() // 正确 } } (new Inner)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.luning.wang/post/scala%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/" />
+<meta property="article:published_time" content="2018-11-01T01:15:09+08:00" />
+<meta property="article:modified_time" content="2018-11-01T01:15:09+08:00" />
+<meta itemprop="name" content="Scala语法笔记">
+<meta itemprop="description" content="函数 如果函数没参数可以不写括号
+def three = 1 &#43; 2 匿名函数
+(x: Int) =&gt; x &#43; 1 val addOne = (x: Int) =&gt; x &#43; 1 部分应用
+def adder(m: Int, n: Int) = m &#43; n val add2 = adder(2, _: Int) add2(3) res: Int = 5 科里化
+def multiply(m: Int)(n: Int): Int = m * n multiply(2)(3) val timesTwo = multiply(2) _ times(3) 类 除了方法之外的代码全是构造函数
+private 内部类可以访问private
+外部类不能访问private
+但是Java中都可以
+class Outer{ class Inner{ private def f(){println(&quot;f&quot;)} class InnerMost{ f() // 正确 } } (new Inner).">
+<meta itemprop="datePublished" content="2018-11-01T01:15:09&#43;08:00" />
+<meta itemprop="dateModified" content="2018-11-01T01:15:09&#43;08:00" />
+<meta itemprop="wordCount" content="418">
+
+
+
+<meta itemprop="keywords" content="编程语言," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Scala语法笔记"/>
+<meta name="twitter:description" content="函数 如果函数没参数可以不写括号
+def three = 1 &#43; 2 匿名函数
+(x: Int) =&gt; x &#43; 1 val addOne = (x: Int) =&gt; x &#43; 1 部分应用
+def adder(m: Int, n: Int) = m &#43; n val add2 = adder(2, _: Int) add2(3) res: Int = 5 科里化
+def multiply(m: Int)(n: Int): Int = m * n multiply(2)(3) val timesTwo = multiply(2) _ times(3) 类 除了方法之外的代码全是构造函数
+private 内部类可以访问private
+外部类不能访问private
+但是Java中都可以
+class Outer{ class Inner{ private def f(){println(&quot;f&quot;)} class InnerMost{ f() // 正确 } } (new Inner)."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">天问</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://blog.luning.wang/">Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://blog.luning.wang/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://blog.luning.wang/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://blog.luning.wang/about/">About</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://blog.luning.wang/categories/">Categories</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      天问
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://blog.luning.wang/">Home</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://blog.luning.wang/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://blog.luning.wang/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://blog.luning.wang/about/">About</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://blog.luning.wang/categories/">Categories</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">Scala语法笔记</h1>
+      
+      <div class="post-meta">
+        <time datetime="2018-11-01" class="post-time">
+          2018-11-01
+        </time>
+        
+        
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    
+    <div class="post-content">
+      <h2 id="heading">函数</h2>
+<p>如果函数没参数可以不写括号</p>
+<pre><code>def three = 1 + 2
+</code></pre><p>匿名函数</p>
+<pre><code>(x: Int) =&gt; x + 1
+val addOne = (x: Int) =&gt; x + 1
+</code></pre><p>部分应用</p>
+<pre><code>def adder(m: Int, n: Int) = m + n
+val add2 = adder(2, _: Int)
+add2(3)
+res: Int = 5
+</code></pre><p>科里化</p>
+<pre><code>def multiply(m: Int)(n: Int): Int = m * n
+multiply(2)(3)
+val timesTwo = multiply(2) _
+times(3)
+
+</code></pre><h2 id="heading1">类</h2>
+<p>除了方法之外的代码全是构造函数</p>
+<h3 id="private">private</h3>
+<p>内部类可以访问private</p>
+<p>外部类不能访问private</p>
+<p>但是Java中都可以</p>
+<pre><code>class Outer{
+    class Inner{
+    private def f(){println(&quot;f&quot;)}
+    class InnerMost{
+        f() // 正确
+        }
+    }
+    (new Inner).f() //错误
+}
+</code></pre><h3 id="protected">protected</h3>
+<p>只有子类能访问protected</p>
+<p>Java中同一个包中的也可以访问protected</p>
+<pre><code>package p{
+class Super{
+    protected def f() {println(&quot;f&quot;)}
+    }
+    class Sub extends Super{
+        f()
+    }
+    class Other{
+        (new Super).f() //错误
+    }
+}
+</code></pre><h2 id="heading2">包</h2>
+<h3 id="heading3">包对象</h3>
+<p>由于JVM的限制，包可以包含类、对象、特质，但不能包含函数和变量。包对象是用来解决这个问题的语法糖，可以把函数或变量绑定到包上。每个包都可以有个包对象，在父包中定义它，如下代码：</p>
+<pre><code>package com.horstmann.impatient
+
+package object people {
+
+val defaultName=&quot;John Q. Public&quot;
+
+}
+
+package people {
+
+class Person {
+
+var name=defaultName // 从包对象拿到的常置
+
+}
+
+…….
+
+}
+
+}
+</code></pre><p>defaultName可以通过com.horstmann.impatient.people.defaultName直接访问。
+底层原理：
+包对象被编译成名为package.class的JVM类，位于相应的包下。上例中把包对象代码放到一下位置是等价的com/horstmann/impatient/people/package.scala
+<a href="http://lib.csdn.net/article/scala/40444">包和引用详解</a></p>
+<h2 id="traitsabstract-class">特质（Traits）和抽象类（Abstract Class）</h2>
+<p>抽象类定义方法但是不实现</p>
+<pre><code>abstract class Shape {
+    def getArea(): Int
+}
+</code></pre><p>特质属性和方法</p>
+<pre><code>trait Car {
+    val brand: String
+    def run(): Unit
+}
+</code></pre><p>使用特质还是抽象类？</p>
+<ul>
+<li>优先使用特质。一个类可以继承多个特质，但只能继承一个抽象类。</li>
+<li>如果需要构造函数参数，则使用抽象类。抽象类可以定义构造函数参数，特质不行。</li>
+</ul>
+<h2 id="apply">apply方法</h2>
+<p>对象直接加()就会直接调用apply方法</p>
+<pre><code>class Foo {}
+object FooMaker {
+    def apply() = new Foo
+}
+val newFoo = FooMaker()
+</code></pre><pre><code>class Bar {
+    def apply() = 0
+}
+val bar = new Bar
+bar()
+</code></pre><h2 id="heading4">函数也是对象</h2>
+<p>但方法不是</p>
+<h2 id="heading5">基本数据额结构</h2>
+<p>数组和列表区别</p>
+<ul>
+<li>数组 Array 有序可变</li>
+<li>列表 List 有序不可变</li>
+</ul>
+<h4 id="-tuple-">元组 Tuple 容纳不同类型</h4>
+<p>获取元素，从1开始</p>
+<pre><code>tuple._1
+</code></pre><p>元组和模式匹配结合</p>
+<pre><code>hostPort match {
+    case (&quot;localhost&quot;, port) =&gt; 
+    case (host, 80) =&gt; 
+    case (_, _) =&gt;
+}
+</code></pre><p>创建两元素元组语法糖</p>
+<pre><code>1 -&gt; 2
+res0: (Int, Int) = (1, 2)
+</code></pre><h4 id="-map">映射 Map</h4>
+<p>初始化Map传递key和value元组即可</p>
+<pre><code>Map(1 -&gt; &quot;one&quot;)
+Map(1 -&gt; &quot;one&quot;, 2 -&gt; &quot;two&quot;)
+Map((1, &quot;one&quot;), (2, &quot;two&quot;))
+</code></pre><p>map.get(key)会返回下面特质的子类Some[T]或None</p>
+<pre><code>trait Option[T] {
+    def isDefined: Boolean
+    def get: T
+    def getOrElse(t: T): T
+}
+</code></pre><p>获取value的方式</p>
+<pre><code>val res = map.get(key)
+val value = if (res.isDefined) {
+    res.get
+} else {
+    0 //key没有匹配到
+}
+</code></pre><p>第二种</p>
+<pre><code>val value = res.getOrElse(key)
+</code></pre><p>第三种模式匹配</p>
+<pre><code>val value = res match {
+    case Some(n) =&gt; n
+    case None =&gt; 0 //没匹配到的返回值
+}
+</code></pre><h2 id="heading6">函数组合子</h2>
+<p>flatMap = map + flatten</p>
+<h2 id="heading7">模式匹配</h2>
+<hr>
+<p><code>a</code>会让变量模式变成常量模式，下面输出“没有匹配”</p>
+<pre><code>object Demo {
+    val a = 2
+
+    def main(args: Array[String]) = {
+        println(testPatternMatching(1))
+    }
+
+    def testPatternMatching(e: Int) = e match {
+        case `a` =&gt; &quot;haha: &quot; + a
+        case _ =&gt; &quot;没有匹配&quot;
+    }
+}
+</code></pre><pre><code>foo match {
+    case List(0, _*) =&gt;
+    case _ =&gt;
+}
+</code></pre><p>类型擦除</p>
+<pre><code>
+</code></pre><p>变量绑定</p>
+<pre><code>foo match {
+    case Bar(&quot;test&quot;, e @ 12) =&gt; e
+    case _ =&gt;
+}
+</code></pre><p>12则赋值给e，e作为匹配对象</p>
+<h2 id="heading8">语法糖</h2>
+<ul>
+<li>如果只传一个参数可以用花括号代替小括号。</li>
+</ul>
+<pre><code>println(&quot;haha&quot;)
+println{ &quot;haha&quot; }
+</code></pre><ul>
+<li>传名函数
+() =&gt; 可以省略 ()</li>
+</ul>
+<p>这样写出来的代码就更像语言原生的了</p>
+<pre><code>def foo(bar: =&gt; Boolan) = 
+    bar()
+foo(5 &gt; 3)
+foo {
+    5 &gt; 3
+}
+</code></pre><h2 id="heading9">资料</h2>
+<p><a href="http://twitter.github.io/scala_school/zh_cn/index.html">Twitter Scala School</a>
+<a href="http://twitter.github.io/effectivescala/index-cn.html">Effctive Scala</a>
+<a href="https://blog.csdn.net/l1028386804/article/details/80950393">Implicit 详解</a></p>
+
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Ana</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+      2018-11-01
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/wechat-qr-code.jpeg">
+        <span>微信打赏</span>
+      </label>
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/alipay-qr-code.jpeg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div>
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://blog.luning.wang/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/mysql%E7%AC%94%E8%AE%B0/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">MySQL笔记</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        
+          <a class="next" href="/post/sql%E7%AC%94%E8%AE%B0/">
+            <span class="next-text nav-default">SQL笔记</span>
+            <span class="prev-text nav-mobile">下一篇</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="deadwind4@outlook.com" rel="me noopener" class="iconfont"
+      title="email"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://github.com/deadwind4" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://blog.luning.wang/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2017 -
+    2019
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        Ana
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

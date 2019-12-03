@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>编程语言 on 天问</title>
+    <link>https://blog.luning.wang/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</link>
+    <description>Recent content in 编程语言 on 天问</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 01 Nov 2018 01:15:09 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.luning.wang/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Scala语法笔记</title>
+      <link>https://blog.luning.wang/post/scala%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Thu, 01 Nov 2018 01:15:09 +0800</pubDate>
+      
+      <guid>https://blog.luning.wang/post/scala%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/</guid>
+      <description>函数 如果函数没参数可以不写括号
+def three = 1 + 2 匿名函数
+(x: Int) =&amp;gt; x + 1 val addOne = (x: Int) =&amp;gt; x + 1 部分应用
+def adder(m: Int, n: Int) = m + n val add2 = adder(2, _: Int) add2(3) res: Int = 5 科里化
+def multiply(m: Int)(n: Int): Int = m * n multiply(2)(3) val timesTwo = multiply(2) _ times(3) 类 除了方法之外的代码全是构造函数
+private 内部类可以访问private
+外部类不能访问private
+但是Java中都可以
+class Outer{ class Inner{ private def f(){println(&amp;quot;f&amp;quot;)} class InnerMost{ f() // 正确 } } (new Inner).</description>
+    </item>
+    
+    <item>
+      <title>SQL笔记</title>
+      <link>https://blog.luning.wang/post/sql%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sat, 10 Mar 2018 01:15:09 +0800</pubDate>
+      
+      <guid>https://blog.luning.wang/post/sql%E7%AC%94%E8%AE%B0/</guid>
+      <description>基础知识 SQL IN SELECT column_name FROM table_name WHERE column_name IN (value1, value2); 作用：筛选column等于value1或value2。
+SQL BETWEEN SELECT column_name(s) FROM table_name WHERE column_name IN (value1,value2); 作用：筛选大于等于value小于value2。 value可为字符串。
+ALTER 添加列
+ALTER TABLE table_name ADD column_name datatype 删除列
+ALTER TABLE table_name DROP COLUMN column_name 改变列数据类型
+ALTER TABLE table_name ALTER COLUMN column_name datatype 常用记不住的SQL语句收集 创建行时create_at字段自动填写为当前时间。 ALTER TABLE foo MODIFY create_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP; 更新行时update_at字段自动填写为当前时间。 ALTER TABLE foo MODIFY update_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;</description>
+    </item>
+    
+  </channel>
+</rss>
