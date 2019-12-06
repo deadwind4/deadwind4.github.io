@@ -6,10 +6,28 @@
     <description>Recent content in Posts on 天问</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 03 Dec 2018 15:07:19 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 06 Dec 2019 15:22:58 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.luning.wang/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>DataNode健康检查</title>
+      <link>https://blog.luning.wang/post/datanode%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/</link>
+      <pubDate>Fri, 06 Dec 2019 15:22:58 +0800</pubDate>
+      
+      <guid>https://blog.luning.wang/post/datanode%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/</guid>
+      <description>DataNode健康检查 概述 HDFS的一个核心假设是，硬件故障是常态，而不是例外。健康检查尽可能不影响线上使用。一共有三种检查机制：Block Scanner &amp;amp; Volume Scanner、Directory Scanner、Disk Checker。Block Scanner &amp;amp; Volume Scanner（块和卷扫描） 概述 机器上每块磁盘对应HDFS的卷（Volume）概念。Block Scanner包含一组Volume Scanner，每个Volume Scanner起一个线程扫描某个卷（磁盘）。 Volume Scanner有一个可疑块列表，会优先扫描可疑块。跟踪过去10分钟内扫描过的可疑块，防止重复扫描。
+可疑列表 如果来自客户端或者另一个DataNode的IO请求报非网络的IOException错误（除了Socket超时、连接重置等），则把此块加入可以列表。
+游标 scanner.cursor保存扫描进度。下次扫描读取之前的进度，不用从头开始。
+提前唤醒 当一个块被标记为可疑，此时还没发生扫描，则提前唤醒扫描器。提前唤醒也会把整个DataNode扫描一遍。
+对应配置 dfs.block.scanner.volume.bytes.per.second：每秒最多扫描的字节数默认1M，0表示禁用。dfs.datanode.scan.period.hours：默认504小时3周 每次扫描间隔多长时间。设置0将使用默认值。负值表示禁用。如果设置过短，比扫描整个DataNode时间还短，设置就没有意义了。dfs.block.scanner.cursor.save.interval.ms：游标保存间隔默认十分钟。
+坏块（corrupted block）处理 corrupted block会汇报给，NN调用namesystem.reportBadBlocks处理，会把block标记为corrupt，如果副本数满足一定条件，会把那个副本删掉。存活的副本数低于要求的副本数时，会触发副本复制。
+Directory Scanners（目录扫描） 概述 主要检查并修复缓存和磁盘文件不一致。定期扫描块数据文件和块元数据文件。只检查finalized状态的块。
+对应配置 dfs.datanode.directoryscan.throttle.limit.ms.per.sec：每秒限制运行多久，针对每个线程默认1000，即全程限制根本不执行。小于1000才开启。dfs.datanode.directoryscan.threads：扫描器拥有最大并发线程数。默认为1。dfs.datanode.directoryscan.interval：默认21600秒，即6小时。设置负值表示禁用。Disk Checker（磁盘检查） 概述 一旦发现磁盘（卷）有问题，则停止该卷写入，并重新复制该卷的数据块，保证副本个数。
+检查过程 创建线程检查。递归遍历finalized、tmp、rbw三个目录。检查子目录是否有创建新子目录和读写执行三权限。由于已经有Block Scanner，即使没有Disk Checker，也会锁定磁盘全部块，并且为了减少IO对线上影响，所以只执行上诉轻量检查。磁盘检查与上诉两种扫描不同，不是周期进行，而是按需进行。只在常规I/O操作(例如关闭块或元数据文件、目录扫描误等)期间捕捉到DataNode上的IOException时才运行。
+对应配置 dfs.datanode.failed.volumes.allowed：故障卷大于该值，则DataNode失效。默认值为0。</description>
+    </item>
     
     <item>
       <title>MySQL笔记</title>

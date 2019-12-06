@@ -6,10 +6,28 @@
     <description>Recent content in Tags on 天问</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 03 Dec 2018 15:07:19 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 06 Dec 2019 15:22:58 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.luning.wang/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Hadoop</title>
+      <link>https://blog.luning.wang/tags/hadoop/</link>
+      <pubDate>Fri, 06 Dec 2019 15:22:58 +0800</pubDate>
+      
+      <guid>https://blog.luning.wang/tags/hadoop/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HDFS</title>
+      <link>https://blog.luning.wang/tags/hdfs/</link>
+      <pubDate>Fri, 06 Dec 2019 15:22:58 +0800</pubDate>
+      
+      <guid>https://blog.luning.wang/tags/hdfs/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>业务组件</title>

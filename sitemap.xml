@@ -2,27 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.luning.wang/post/datanode%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/</loc>
+    <lastmod>2019-12-06T15:22:58+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.luning.wang/tags/hadoop/</loc>
+    <lastmod>2019-12-06T15:22:58+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.luning.wang/tags/hdfs/</loc>
+    <lastmod>2019-12-06T15:22:58+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.luning.wang/post/</loc>
+    <lastmod>2019-12-06T15:22:58+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.luning.wang/tags/</loc>
+    <lastmod>2019-12-06T15:22:58+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.luning.wang/</loc>
+    <lastmod>2019-12-06T15:22:58+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.luning.wang/about/</loc>
     <lastmod>2019-12-03T11:42:23+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.luning.wang/</loc>
-    <lastmod>2019-12-03T11:42:23+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.luning.wang/post/mysql%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2018-12-03T15:07:19+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.luning.wang/post/</loc>
-    <lastmod>2018-12-03T15:07:19+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.luning.wang/tags/</loc>
     <lastmod>2018-12-03T15:07:19+08:00</lastmod>
   </url>
   
