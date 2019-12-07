@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>天问</title>
+  <title>Flink Key Groups与最大并行度 - 天问</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,9 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="Ana" />
-  <meta name="description" content="个人博客" />
+  <meta name="description" content="概述 Key Groups机制决定Flink中带有key的数据由哪个subtask处理。类似Spark中的Hash Shuffle。Key-Group数量就是最大并行度的值。即算子并行度不能超过Key-Group个数。初次设置最大并行度后，如果调整必须丢弃Checkpoint/Savepoint。
+" />
+
 
 
 
@@ -33,8 +35,8 @@
 <meta name="generator" content="Hugo 0.60.1" />
 
 
-<link rel="canonical" href="https://blog.luning.wang/" />
-<link href="/index.xml" rel="alternate" type="application/rss+xml" title="天问" />
+<link rel="canonical" href="https://blog.luning.wang/post/flink-key-groups%E4%B8%8E%E6%9C%80%E5%A4%A7%E5%B9%B6%E8%A1%8C%E5%BA%A6/" />
+
 
 
 
@@ -57,15 +59,26 @@
 
 
 
-<meta property="og:title" content="天问" />
-<meta property="og:description" content="个人博客" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://blog.luning.wang/" />
-<meta property="og:updated_time" content="2019-12-06T15:22:58+08:00" />
-<meta itemprop="name" content="天问">
-<meta itemprop="description" content="个人博客"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="天问"/>
-<meta name="twitter:description" content="个人博客"/>
+<meta property="og:title" content="Flink Key Groups与最大并行度" />
+<meta property="og:description" content="概述
+Key Groups机制决定Flink中带有key的数据由哪个subtask处理。类似Spark中的Hash Shuffle。Key-Group数量就是最大并行度的值。即算子并行度不能超过Key-Group个数。初次设置最大并行度后，如果调整必须丢弃Checkpoint/Savepoint。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.luning.wang/post/flink-key-groups%E4%B8%8E%E6%9C%80%E5%A4%A7%E5%B9%B6%E8%A1%8C%E5%BA%A6/" />
+<meta property="article:published_time" content="2019-11-08T19:54:52+08:00" />
+<meta property="article:modified_time" content="2019-11-08T19:54:52+08:00" />
+<meta itemprop="name" content="Flink Key Groups与最大并行度">
+<meta itemprop="description" content="概述
+Key Groups机制决定Flink中带有key的数据由哪个subtask处理。类似Spark中的Hash Shuffle。Key-Group数量就是最大并行度的值。即算子并行度不能超过Key-Group个数。初次设置最大并行度后，如果调整必须丢弃Checkpoint/Savepoint。">
+<meta itemprop="datePublished" content="2019-11-08T19:54:52&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-08T19:54:52&#43;08:00" />
+<meta itemprop="wordCount" content="52">
+
+
+
+<meta itemprop="keywords" content="Flink," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Flink Key Groups与最大并行度"/>
+<meta name="twitter:description" content="概述
+Key Groups机制决定Flink中带有key的数据由哪个subtask处理。类似Spark中的Hash Shuffle。Key-Group数量就是最大并行度的值。即算子并行度不能超过Key-Group个数。初次设置最大并行度后，如果调整必须丢弃Checkpoint/Savepoint。"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -155,7 +168,7 @@
   <ul id="menu" class="menu">
     
     
-        <li class="menu-item active">
+        <li class="menu-item">
         
           
           
@@ -224,141 +237,153 @@
     <main id="main" class="main bg-llight">
       <div class="content-wrapper">
         <div id="content" class="content container">
-          
-<section id="posts" class="posts">
-  
-  
+          <article class="post bg-white">
     
-  
-  
-  
-    <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title">
+    <header class="post-header">
+      <h1 class="post-title">Flink Key Groups与最大并行度</h1>
       
-      <a class="post-link" href="/post/datanode%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/">DataNode健康检查</a>
-    </h1>
-    
-    <div class="post-meta">
-      <time datetime="2019-12-06" class="post-time">
-        2019-12-06
-      </time>
-      
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      <h1 id="heading">概述</h1>
-<p>HDFS的一个核心假设是，硬件故障是常态，而不是例外。健康检查尽可能不影响线上使用。<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->一共有三种检查机制：Block Scanner &amp; Volume Scanner、Directory Scanner、Disk Checker。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/datanode%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/" class="read-more-link">阅读全文</a>
-    </div>
-    
-  </div>
-</article>
+      <div class="post-meta">
+        <time datetime="2019-11-08" class="post-time">
+          2019-11-08
+        </time>
+        
+        
 
-  
-    <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title">
-      
-      <a class="post-link" href="/post/flink-key-groups%E4%B8%8E%E6%9C%80%E5%A4%A7%E5%B9%B6%E8%A1%8C%E5%BA%A6/">Flink Key Groups与最大并行度</a>
-    </h1>
+        
+        
+
+        
+        
+      </div>
+    </header>
+
     
-    <div class="post-meta">
-      <time datetime="2019-11-08" class="post-time">
-        2019-11-08
-      </time>
-      
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
     
-    <div class="post-summary">
+
+    
+    <div class="post-content">
       <h1 id="heading">概述</h1>
 <p>Key Groups机制决定Flink中带有key的数据由哪个subtask处理。类似Spark中的Hash Shuffle。<!-- raw HTML omitted -->Key-Group数量就是最大并行度的值。即算子并行度不能超过Key-Group个数。<!-- raw HTML omitted -->初次设置最大并行度后，如果调整必须丢弃Checkpoint/Savepoint。</p>
+<h1 id="heading1">最大并行度取值</h1>
+<p>设置代码如下</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">final</span> StreamExecutionEnvironment env <span style="color:#f92672">=</span> StreamExecutionEnvironment<span style="color:#f92672">.</span><span style="color:#a6e22e">getExecutionEnvironment</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+ExecutionConfig executionConfig <span style="color:#f92672">=</span> env<span style="color:#f92672">.</span><span style="color:#a6e22e">getConfig</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+executionConfig<span style="color:#f92672">.</span><span style="color:#a6e22e">setMaxParallelism</span><span style="color:#f92672">(</span>4<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+</code></pre></div><p>如果没有手动设置则按照以下规则：<!-- raw HTML omitted -->默认值第一次启动时设置：</p>
+<ul>
+<li>当任务并行度小于 128 时，最大并行度默认是 128。</li>
+<li>任务并行度大于等于 128 时，最大并行度取值为：<strong>parallelism + (parallelism / 2)</strong> 不会大于 2^15 = 32768</li>
+</ul>
+<h1 id="key">key分配算法</h1>
+<p>决定key属于哪个Key-Group。<!-- raw HTML omitted -->哈希取模法。key计算hashCode()在和maxParallelism取模。<!-- raw HTML omitted -->举例：key的hashCode为11，最大并行度是10，那么Key Group内会包含KG-0到KG-9。 11 % 10 = 1。那么这个key会分配到KG-1中。</p>
+<h1 id="keygroup">Key-Group分配算法</h1>
+<p>决定Key-Group属于哪个并行Operator（subtask里的）。<!-- raw HTML omitted -->原则是尽可能均匀将Key-Group分给Operator。Flink采用最简单粗暴的方式。除以算子并行度，整除部分直接可以均匀分配，余数部分逐一分给前N个算子。<!-- raw HTML omitted -->举例：假如有8个key-group，算子并行度为3，8 / 3 = 2 余 2。前2个Operator分配3个Key-Group，剩下的2个分配Key-Group。Key-Group和Operator是对齐的，即编号小的KG在编号小的Operator里。<!-- raw HTML omitted --></p>
+<h1 id="heading2">最大并行度存在原因</h1>
+<p>算子在未来可以提升并发能力的上限。<!-- raw HTML omitted -->如果硬要调高最大并行度参数，作业已经保存过的状态或者 checkpoint/savepoint 只能丢弃。<!-- raw HTML omitted -->调高最大并行度产生过多key-groups，使状态增大，state snapshots也随之增大，降低性能。</p>
     </div>
-    <div class="read-more">
-      <a href="/post/flink-key-groups%E4%B8%8E%E6%9C%80%E5%A4%A7%E5%B9%B6%E8%A1%8C%E5%BA%A6/" class="read-more-link">阅读全文</a>
-    </div>
+
     
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Ana</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+      2019-11-08
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/wechat-qr-code.jpeg">
+        <span>微信打赏</span>
+      </label>
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/alipay-qr-code.jpeg">
+        <span>支付宝打赏</span>
+      </label>
   </div>
-</article>
+</div>
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://blog.luning.wang/tags/flink/">Flink</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/datanode%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">DataNode健康检查</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        
+          <a class="next" href="/post/sql%E7%AC%94%E8%AE%B0/">
+            <span class="next-text nav-default">SQL笔记</span>
+            <span class="prev-text nav-mobile">下一篇</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
 
   
-    <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title">
-      
-      <a class="post-link" href="/post/sql%E7%AC%94%E8%AE%B0/">SQL笔记</a>
-    </h1>
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
     
-    <div class="post-meta">
-      <time datetime="2018-03-10" class="post-time">
-        2018-03-10
-      </time>
-      
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      基础知识 SQL IN SELECT column_name FROM table_name WHERE column_name IN (value1, value2); 作用：筛选column等于value1或value2。
-SQL BETWEEN SELECT column_name(s) FROM table_name WHERE column_name IN (value1,value2); 作用：筛选大于等于value小于value2。 value可为字符串。
-ALTER 添加列
-ALTER TABLE table_name ADD column_name datatype 删除列
-ALTER TABLE table_name DROP COLUMN column_name 改变列数据类型
-ALTER TABLE table_name ALTER COLUMN column_name datatype 常用记不住的SQL语句收集 创建行时create_at字段自动填写为当前时间。 ALTER TABLE foo MODIFY create_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP; 更新行时update_at字段自动填写为当前时间。 ALTER TABLE foo MODIFY update_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
-    </div>
-    <div class="read-more">
-      <a href="/post/sql%E7%AC%94%E8%AE%B0/" class="read-more-link">阅读全文</a>
-    </div>
-    
-  </div>
-</article>
 
   
-</section>
-
-
-
-
-
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
-
-
-
-
 
         </div>
       </div>

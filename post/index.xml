@@ -23,39 +23,13 @@
     </item>
     
     <item>
-      <title>gevent指南</title>
-      <link>https://blog.luning.wang/post/gevent%E6%8C%87%E5%8D%97/</link>
-      <pubDate>Fri, 01 Nov 2019 16:37:43 +0800</pubDate>
+      <title>Flink Key Groups与最大并行度</title>
+      <link>https://blog.luning.wang/post/flink-key-groups%E4%B8%8E%E6%9C%80%E5%A4%A7%E5%B9%B6%E8%A1%8C%E5%BA%A6/</link>
+      <pubDate>Fri, 08 Nov 2019 19:54:52 +0800</pubDate>
       
-      <guid>https://blog.luning.wang/post/gevent%E6%8C%87%E5%8D%97/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>MySQL笔记</title>
-      <link>https://blog.luning.wang/post/mysql%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Mon, 03 Dec 2018 15:07:19 +0800</pubDate>
-      
-      <guid>https://blog.luning.wang/post/mysql%E7%AC%94%E8%AE%B0/</guid>
-      <description>Mysql学习笔记 安装 资料 删除掉所有有关mariadb的包
-wget https://cdn.mysql.com/archives/mysql-5.7/mysql-5.7.22-linux-glibc2.12-x86_64.tar.gz wget https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.24-1.el7.x86_64.rpm-bundle.tar rpm -qa | grep -i mariadb rpm -e --nodeps mariadb-libs-5.5.52-1.el7.x86_64 rpm -ivh mysql-community-common-5.7.23-1.el7.x86_64.rpm rpm -ivh mysql-community-libs-5.7.23-1.el7.x86_64.rpm rpm -ivh mysql-community-client-5.7.23-1.el7.x86_64.rpm rpm -ivh mysql-community-server-5.7.23-1.el7.x86_64.rpm 用户  创建 CREATE USER &#39;username&#39;@&#39;host&#39; IDENTIFIED BY &#39;password&#39;; 字段含义  username：创建用户的用户名 host：指定用户在哪个主机可以登录，如果想让该用户可以从任意远程主机登录，则使用通配符% password：该用户的登录密码。如果为空，则该用户不需要密码即可登录。  举例： CREATE USER &#39;test&#39;@&#39;%&#39; IDENTIFIED BY &#39;test&#39;; CREATE USER &#39;test&#39;; 权限 GRANT privileges ON databasename.tablename TO &#39;username&#39;@&#39;host&#39; 字段含义  privileges：用户的权限。如SELECT、INSERT、UPDATE等，如授予所有权限则为ALL。 databasename：数据库名 tablename：表名，如授予所有库和表的操作权限则为*，如*.*  例子： GRANT SELECT, INSERT ON testdb.</description>
-    </item>
-    
-    <item>
-      <title>Scala语法笔记</title>
-      <link>https://blog.luning.wang/post/scala%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Thu, 01 Nov 2018 01:15:09 +0800</pubDate>
-      
-      <guid>https://blog.luning.wang/post/scala%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/</guid>
-      <description>函数 如果函数没参数可以不写括号
-def three = 1 + 2 匿名函数
-(x: Int) =&amp;gt; x + 1 val addOne = (x: Int) =&amp;gt; x + 1 部分应用
-def adder(m: Int, n: Int) = m + n val add2 = adder(2, _: Int) add2(3) res: Int = 5 科里化
-def multiply(m: Int)(n: Int): Int = m * n multiply(2)(3) val timesTwo = multiply(2) _ times(3) 类 除了方法之外的代码全是构造函数
-private 内部类可以访问private
-外部类不能访问private
-但是Java中都可以
-class Outer{ class Inner{ private def f(){println(&amp;quot;f&amp;quot;)} class InnerMost{ f() // 正确 } } (new Inner).</description>
+      <guid>https://blog.luning.wang/post/flink-key-groups%E4%B8%8E%E6%9C%80%E5%A4%A7%E5%B9%B6%E8%A1%8C%E5%BA%A6/</guid>
+      <description>&lt;h1 id=&#34;heading&#34;&gt;概述&lt;/h1&gt;
+&lt;p&gt;Key Groups机制决定Flink中带有key的数据由哪个subtask处理。类似Spark中的Hash Shuffle。&lt;!-- raw HTML omitted --&gt;Key-Group数量就是最大并行度的值。即算子并行度不能超过Key-Group个数。&lt;!-- raw HTML omitted --&gt;初次设置最大并行度后，如果调整必须丢弃Checkpoint/Savepoint。&lt;/p&gt;</description>
     </item>
     
     <item>

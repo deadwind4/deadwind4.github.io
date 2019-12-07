@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Flink on 天问</title>
+    <link>https://blog.luning.wang/tags/flink/</link>
+    <description>Recent content in Flink on 天问</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 08 Nov 2019 19:54:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.luning.wang/tags/flink/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Flink Key Groups与最大并行度</title>
+      <link>https://blog.luning.wang/post/flink-key-groups%E4%B8%8E%E6%9C%80%E5%A4%A7%E5%B9%B6%E8%A1%8C%E5%BA%A6/</link>
+      <pubDate>Fri, 08 Nov 2019 19:54:52 +0800</pubDate>
+      
+      <guid>https://blog.luning.wang/post/flink-key-groups%E4%B8%8E%E6%9C%80%E5%A4%A7%E5%B9%B6%E8%A1%8C%E5%BA%A6/</guid>
+      <description>&lt;h1 id=&#34;heading&#34;&gt;概述&lt;/h1&gt;
+&lt;p&gt;Key Groups机制决定Flink中带有key的数据由哪个subtask处理。类似Spark中的Hash Shuffle。&lt;!-- raw HTML omitted --&gt;Key-Group数量就是最大并行度的值。即算子并行度不能超过Key-Group个数。&lt;!-- raw HTML omitted --&gt;初次设置最大并行度后，如果调整必须丢弃Checkpoint/Savepoint。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

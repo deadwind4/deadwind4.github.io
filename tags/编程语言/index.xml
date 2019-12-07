@@ -6,27 +6,10 @@
     <description>Recent content in 编程语言 on 天问</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 01 Nov 2018 01:15:09 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 10 Mar 2018 01:15:09 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.luning.wang/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Scala语法笔记</title>
-      <link>https://blog.luning.wang/post/scala%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Thu, 01 Nov 2018 01:15:09 +0800</pubDate>
-      
-      <guid>https://blog.luning.wang/post/scala%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/</guid>
-      <description>函数 如果函数没参数可以不写括号
-def three = 1 + 2 匿名函数
-(x: Int) =&amp;gt; x + 1 val addOne = (x: Int) =&amp;gt; x + 1 部分应用
-def adder(m: Int, n: Int) = m + n val add2 = adder(2, _: Int) add2(3) res: Int = 5 科里化
-def multiply(m: Int)(n: Int): Int = m * n multiply(2)(3) val timesTwo = multiply(2) _ times(3) 类 除了方法之外的代码全是构造函数
-private 内部类可以访问private
-外部类不能访问private
-但是Java中都可以
-class Outer{ class Inner{ private def f(){println(&amp;quot;f&amp;quot;)} class InnerMost{ f() // 正确 } } (new Inner).</description>
-    </item>
     
     <item>
       <title>SQL笔记</title>
