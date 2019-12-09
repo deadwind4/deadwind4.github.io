@@ -36,6 +36,18 @@
     </item>
     
     <item>
+      <title>Flink算子chain原理</title>
+      <link>https://blog.luning.wang/post/flink%E7%AE%97%E5%AD%90chain%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Fri, 22 Nov 2019 22:38:34 +0800</pubDate>
+      
+      <guid>https://blog.luning.wang/post/flink%E7%AE%97%E5%AD%90chain%E5%8E%9F%E7%90%86/</guid>
+      
+        <description>&lt;h1 id=&#34;operator-chain&#34;&gt;operator chain条件&lt;/h1&gt;
+&lt;p&gt;一共5块包含7条原则，全部满足则可以chain到一起，具体如下。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
       <title>Flink Key Groups与最大并行度</title>
       <link>https://blog.luning.wang/post/flink-key-groups%E4%B8%8E%E6%9C%80%E5%A4%A7%E5%B9%B6%E8%A1%8C%E5%BA%A6/</link>
       <pubDate>Fri, 08 Nov 2019 19:54:52 +0800</pubDate>
