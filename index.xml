@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>天问</title>
+    <title>聚沙成塔</title>
     <link>https://blog.luning.wang/</link>
-    <description>Recent content on 天问</description>
+    <description>Recent content on 聚沙成塔</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 06 Dec 2019 15:22:58 +0800</lastBuildDate>
@@ -31,7 +31,7 @@
       
       <guid>https://blog.luning.wang/about/</guid>
       
-        <description>工程师</description>
+        <description>Ana 大数据工程师 </description>
       
     </item>
     

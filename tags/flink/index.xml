@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Flink on 天问</title>
+    <title>Flink on 聚沙成塔</title>
     <link>https://blog.luning.wang/tags/flink/</link>
-    <description>Recent content in Flink on 天问</description>
+    <description>Recent content in Flink on 聚沙成塔</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 22 Nov 2019 22:38:34 +0800</lastBuildDate>
